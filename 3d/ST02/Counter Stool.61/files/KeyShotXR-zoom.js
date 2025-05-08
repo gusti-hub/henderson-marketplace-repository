@@ -1,6 +1,6 @@
 /**
  * KeyShotXR Direct Image Zoom
- * Modified with 80% default zoom and 0-100% zoom range
+ * Modified with 50% default zoom and 0-100% zoom range
  */
 (function() {
     // Immediately inject the CSS for zoom controls
@@ -85,7 +85,7 @@
         // Zoom indicator
         var indicator = document.createElement('div');
         indicator.className = 'ksxr-zoom-indicator';
-        indicator.textContent = '80%';  // Changed to 80% default
+        indicator.textContent = '50%';  // Changed to 50% default
         indicator.setAttribute('id', 'ksxr-zoom-level');
         
         // Add to container
@@ -101,9 +101,9 @@
     function setupDirectZoom(container) {
         // Zoom state
         var state = {
-            scale: 0.8,           // Changed default to 0.8 (80%)
+            scale: 0.5,           // Changed default to 0.5 (50%)
             minScale: 0.05,       // Setting to 0.05 (5%) instead of 0 to avoid complete collapse
-            maxScale: 1.0,        // Max is 1.0 (100%)
+            maxScale: 1.0,        // Changed max to 1.0 (100%)
             step: 0.05,           // Smaller step for finer control
             offsetX: 0,
             offsetY: 0,
@@ -155,7 +155,7 @@
                 `translate(${state.offsetX}px, ${state.offsetY}px) scale(${state.scale})`;
             
             // Change cursor based on zoom level
-            if (state.scale > 0.85) {  // Changed threshold for move cursor
+            if (state.scale > 0.55) {  // Changed threshold for move cursor
                 container.style.cursor = 'move';
             } else {
                 container.style.cursor = '';
@@ -192,9 +192,9 @@
                 state.offsetY += dy * (1 - oldScale / state.scale);
             }
             
-            // If we're getting close to 0.8 scale (our default), gradually snap back to center
-            if (state.scale < 0.85 && state.scale > 0.75) {
-                var snapFactor = 1 - Math.abs(state.scale - 0.8) / 0.05;
+            // If we're getting close to 0.5 scale (our default), gradually snap back to center
+            if (state.scale < 0.55 && state.scale > 0.45) {
+                var snapFactor = 1 - Math.abs(state.scale - 0.5) / 0.05;
                 if (snapFactor > 0) {
                     state.offsetX *= (1 - snapFactor);
                     state.offsetY *= (1 - snapFactor);
@@ -207,7 +207,7 @@
         
         // Reset zoom
         function reset() {
-            state.scale = 0.8;  // Changed to 0.8 (80%)
+            state.scale = 0.5;  // Changed to 0.5 (50%)
             state.offsetX = 0;
             state.offsetY = 0;
             applyZoom();
@@ -216,7 +216,7 @@
         // Start dragging (pan)
         function startDrag(e) {
             // Only allow dragging when zoomed in beyond default
-            if (state.scale <= 0.81) return;
+            if (state.scale <= 0.51) return;
             
             state.dragging = true;
             
@@ -310,7 +310,7 @@
             attributeFilter: ['style']
         });
         
-        // Initial apply - starting at 80% zoom
+        // Initial apply - starting at 50% zoom
         applyZoom();
         
         // Apply zoom whenever window is resized
