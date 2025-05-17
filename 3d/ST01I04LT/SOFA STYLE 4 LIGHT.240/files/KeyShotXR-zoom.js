@@ -101,9 +101,9 @@
     function setupDirectZoom(container) {
         // Zoom state
         var state = {
-            scale: 0.8,           // Changed default to 0.8 (80%)
+            scale: 1.0,           // Changed default to 0.8 (100%)
             minScale: 0.05,       // Setting to 0.05 (5%) instead of 0 to avoid complete collapse
-            maxScale: 1.0,        // Max is 1.0 (100%)
+            maxScale: 2.0,        // Max is 1.0 (100%)
             step: 0.05,           // Smaller step for finer control
             offsetX: 0,
             offsetY: 0,
